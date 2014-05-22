@@ -1,0 +1,64 @@
+﻿<Window x:Class="COMEX.MarcadoAutomatico.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Miasoft - Marcado Automático" Height="642.666" Width="1020.333" WindowStartupLocation="CenterScreen" Background="#FFFF9B05" Loaded="Window_Loaded" WindowState="Maximized">
+    <Grid Margin="0,0,0,7">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Buscar empleado" Margin="146,20,313,0" VerticalAlignment="Top" Height="80" FontSize="16" Foreground="#FF0066B2" BorderBrush="#FF0066B2" FontWeight="Bold" BorderThickness="2" FontStyle="Italic">
+            <Grid Height="52" VerticalAlignment="Top">
+                <Label Content="Criterio :" Margin="15,9,0,0" FontWeight="Bold" Foreground="#FF0066B2" Height="31" VerticalAlignment="Top" FontStyle="Normal" RenderTransformOrigin="-0.662,-1.323" HorizontalAlignment="Left" Width="77"/>
+                <TextBox x:Name="txbCriterio" TextWrapping="Wrap" Margin="104,13,9,13" FontWeight="Normal" Height="26" FontStyle="Normal"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Empleados" Margin="10,140,313,8" FontSize="16" FontWeight="Bold" Foreground="#FF0066B2" BorderBrush="#FF0066B2" BorderThickness="2" FontStyle="Italic">
+            <ListBox x:Name="lbEmpleados" Margin="10,10,7,3" FontWeight="Normal">
+                <TextBlock Width="600" Height="146"><InlineUIContainer>
+            			<StackPanel Width="100">
+            				<Image  Source="imagenes/usuario.png" Stretch="Fill"/>
+            			</StackPanel>
+            		</InlineUIContainer><InlineUIContainer>
+            			<StackPanel Width="437" Height="130">
+            				<StackPanel Height="31" Orientation="Horizontal">
+            					<Label Content="Código :" FontWeight="Bold"/>
+            					<Label Content="7714738"/>
+            				</StackPanel>
+                            <StackPanel Height="31" Orientation="Horizontal">
+            					<Label Content="Nombre :" FontWeight="Bold"/>
+            					<Label Content="Miguel Aldo Balderrama Vaca"/>
+            				</StackPanel>
+                            <StackPanel Height="31" Orientation="Horizontal">
+            					<Label Content="Cargo :" FontWeight="Bold"/>
+            					<Label Content="Administrador"/>
+            				</StackPanel>
+                            <StackPanel Height="31" Orientation="Horizontal">
+            					<Label Content="Departamento :" FontWeight="Bold"/>
+            					<Label Content="Sistemas"/>
+            				</StackPanel>
+            			</StackPanel>
+            		</InlineUIContainer></TextBlock>
+
+            </ListBox>
+        </GroupBox>
+        <Border BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Left" Height="125" VerticalAlignment="Top" Width="115" CornerRadius="60" Margin="10,5,0,0">
+            <Border.Background>
+                <ImageBrush ImageSource="favicon.png"/>
+            </Border.Background>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0" Height="50" Margin="0,183,71,0" VerticalAlignment="Top" Background="#FF0091FF" CornerRadius="20" HorizontalAlignment="Right" Width="177">
+            <Button Content="Guardar cambios" Margin="-1,-1,-1,0" VerticalAlignment="Top" Height="49" Background="{x:Null}" Foreground="White" BorderThickness="0" Cursor="Hand" FontSize="16"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0" Height="138" Margin="0,10,14,0" VerticalAlignment="Top" CornerRadius="30" HorizontalAlignment="Right" Width="284">
+            <Border.Background>
+                <ImageBrush ImageSource="logo.png"/>
+            </Border.Background>
+        </Border>
+        <StackPanel Height="93" Margin="0,341,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="272">
+            <Label Content="COPY RIGHT 2014 &quot;MIASOFT s.r.l.&quot;" VerticalAlignment="Top" Height="32" Foreground="#FF0029FF" FontSize="16"/>
+            <Label Content="miasoft.bo@gmail.com" VerticalAlignment="Top" Height="33" Foreground="#FF0029FF" FontSize="16" />
+            <Label Content="72634488 - 71010967 - 60895096" VerticalAlignment="Top" Height="28" Foreground="#FF0029FF" FontSize="16" />
+        </StackPanel>
+
+    </Grid>
+</Window>

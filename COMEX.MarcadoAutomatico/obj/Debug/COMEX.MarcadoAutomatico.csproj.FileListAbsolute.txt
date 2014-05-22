@@ -1,0 +1,13 @@
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\bin\Debug\COMEX.MarcadoAutomatico.exe.config
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\bin\Debug\COMEX.MarcadoAutomatico.exe
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\bin\Debug\COMEX.MarcadoAutomatico.pdb
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\MainWindow.baml
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\MainWindow.g.cs
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\App.g.cs
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico_MarkupCompile.cache
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico.g.resources
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico.Properties.Resources.resources
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico.csproj.GenerateResource.Cache
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico.exe
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico.pdb
+C:\Control de Accesos y Asistencia\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico.csprojResolveAssemblyReference.cache
