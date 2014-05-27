@@ -14,30 +14,39 @@
         </GroupBox>
         <GroupBox Header="Empleados" Margin="10,140,313,8" FontSize="16" FontWeight="Bold" Foreground="#FF0066B2" BorderBrush="#FF0066B2" BorderThickness="2" FontStyle="Italic">
             <ListBox x:Name="lbEmpleados" Margin="10,10,7,3" FontWeight="Normal">
-                <TextBlock Width="600" Height="146"><InlineUIContainer>
+                <TextBlock Width="639" Height="146"><InlineUIContainer>
             			<StackPanel Width="100">
             				<Image  Source="imagenes/usuario.png" Stretch="Fill"/>
             			</StackPanel>
             		</InlineUIContainer><InlineUIContainer>
-            			<StackPanel Width="437" Height="130">
-            				<StackPanel Height="31" Orientation="Horizontal">
-            					<Label Content="Código :" FontWeight="Bold"/>
-            					<Label Content="7714738"/>
-            				</StackPanel>
-                            <StackPanel Height="31" Orientation="Horizontal">
-            					<Label Content="Nombre :" FontWeight="Bold"/>
-            					<Label Content="Miguel Aldo Balderrama Vaca"/>
-            				</StackPanel>
-                            <StackPanel Height="31" Orientation="Horizontal">
-            					<Label Content="Cargo :" FontWeight="Bold"/>
-            					<Label Content="Administrador"/>
-            				</StackPanel>
-                            <StackPanel Height="31" Orientation="Horizontal">
-            					<Label Content="Departamento :" FontWeight="Bold"/>
-            					<Label Content="Sistemas"/>
-            				</StackPanel>
-            			</StackPanel>
-            		</InlineUIContainer></TextBlock>
+                		<StackPanel Width="312" Height="130">
+                			<StackPanel Height="31" Orientation="Horizontal">
+                				<Label Content="Código :" FontWeight="Bold"/>
+                				<Label Content="7714738"/>
+                			</StackPanel>
+                			<StackPanel Height="31" Orientation="Horizontal">
+                				<Label Content="Nombre :" FontWeight="Bold"/>
+                				<Label Content="Miguel Aldo Balderrama Vaca"/>
+                			</StackPanel>
+                			<StackPanel Height="31" Orientation="Horizontal">
+                				<Label Content="Cargo :" FontWeight="Bold"/>
+                				<Label Content="Administrador"/>
+                			</StackPanel>
+                			<StackPanel Height="31" Orientation="Horizontal">
+                				<Label Content="Departamento :" FontWeight="Bold"/>
+                				<Label Content="Sistemas"/>
+                			</StackPanel>
+                		</StackPanel>
+                	</InlineUIContainer><InlineUIContainer>
+                		<StackPanel Height="128" Width="218" Orientation="Horizontal">
+                			<CheckBox Content=""/>
+                			<Border BorderBrush="Black" BorderThickness="0" Width="176" CornerRadius="15" ToolTip="Marcado atomático">
+                				<Border.Background>
+                					<ImageBrush ImageSource="imagenes/U-560-C.png"/>
+                				</Border.Background>
+                			</Border>
+                		</StackPanel>
+                	</InlineUIContainer></TextBlock>
 
             </ListBox>
         </GroupBox>
@@ -54,7 +63,7 @@
                 <ImageBrush ImageSource="logo.png"/>
             </Border.Background>
         </Border>
-        <StackPanel Height="93" Margin="0,341,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="272">
+        <StackPanel Height="93" Margin="0,262,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="272">
             <Label Content="COPY RIGHT 2014 &quot;MIASOFT s.r.l.&quot;" VerticalAlignment="Top" Height="32" Foreground="#FF0029FF" FontSize="16"/>
             <Label Content="miasoft.bo@gmail.com" VerticalAlignment="Top" Height="33" Foreground="#FF0029FF" FontSize="16" />
             <Label Content="72634488 - 71010967 - 60895096" VerticalAlignment="Top" Height="28" Foreground="#FF0029FF" FontSize="16" />

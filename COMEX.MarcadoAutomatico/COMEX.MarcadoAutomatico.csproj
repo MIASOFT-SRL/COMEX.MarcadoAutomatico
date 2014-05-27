@@ -36,13 +36,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,6 +77,132 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Datos\ACGroup.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ACTimeZones.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ACUnlockComb.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\AlarmLog.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\AttParam.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\AuditedExc.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\AUTHDEVICE.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\CHECKEXACT.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\CHECKINOUT.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\dbAccesControl.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbAccesControl.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\dbAccesControl.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\dbAccesControl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbAccesControl.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\DEPARTMENTS.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\DeptUsedSchs.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\EmOpLog.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\FaceTemp.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\HOLIDAYS.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\LeaveClass.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\LeaveClass1.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Machines.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\NUM_RUN.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\NUM_RUN_DEIL.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ReportItem.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\SchClass.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\SECURITYDETAILS.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ServerLog.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\SHIFT.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\SystemLog.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\TBSMSALLOT.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\TBSMSINFO.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\TEMPLATE.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\UserACMachines.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\UserACPrivilege.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\USERINFO.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\UsersMachines.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\UserUpdates.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\UserUsedSClasses.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\USER_OF_RUN.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\USER_SPEDAY.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\USER_TEMP_SCH.cs">
+      <DependentUpon>dbAccesControl.tt</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -93,6 +226,24 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Datos\dbAccesControl.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbAccesControl.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Datos\dbAccesControl.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbAccesControl.edmx</DependentUpon>
+      <LastGenOutput>dbAccesControl.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Datos\dbAccesControl.edmx.diagram">
+      <DependentUpon>dbAccesControl.edmx</DependentUpon>
+    </None>
+    <None Include="Datos\dbAccesControl.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbAccesControl.edmx</DependentUpon>
+      <LastGenOutput>dbAccesControl.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -119,6 +270,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="imagenes\usuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imagenes\U-560-C.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
