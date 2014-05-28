@@ -33,6 +33,16 @@ namespace COMEX.MarcadoAutomatico
             return new Image() { Stretch = Stretch.Fill, Source = source };
         }
 
+        private Image getImagen(string pathImage)
+        {
+            BitmapImage source = new BitmapImage();
+            source.BeginInit();
+            string ruta = pathImage;
+            source.UriSource = new Uri(ruta, UriKind.Relative);
+            source.EndInit();
+            return new Image() { Stretch = Stretch.Fill, Source = source };
+        }
+
         private StackPanel getSkpImagen()
         {
             //StackPanel skpImagen
@@ -40,6 +50,21 @@ namespace COMEX.MarcadoAutomatico
             Image imgUsuario = getImagen();
             skpImagen.Children.Add(imgUsuario);
             return skpImagen;
+        }
+
+        private StackPanel getSkpMarcado()
+        {
+            CheckBox cbx = new CheckBox() { Name = "cbxMarcado" };
+            Image img = getImagen("imagenes/U-560-C.png");
+            img.Width = 176;
+            img.ToolTip = "Marcado automático";
+            img.MouseDown += new MouseButtonEventHandler (Image_MouseDown);
+            
+            StackPanel SkpMarcado = new StackPanel() { Height = 128, Width = 218, Orientation = Orientation.Horizontal };
+            SkpMarcado.Children.Add(cbx);
+            SkpMarcado.Children.Add(img);
+
+            return SkpMarcado;
         }
 
         private StackPanel getSkpDetalleItem(string name, string descripcion)
@@ -61,7 +86,7 @@ namespace COMEX.MarcadoAutomatico
             StackPanel skpDetalleItem2 = getSkpDetalleItem("Nombre :", nombre);
             StackPanel skpDetalleItem3 = getSkpDetalleItem("Cargo :", cargo);
             StackPanel skpDetalleItem4 = getSkpDetalleItem("Departamento :", departamento);
-            StackPanel skpDetalle = new StackPanel() { Width = 437, Height = 130 };
+            StackPanel skpDetalle = new StackPanel() { Width = 312, Height = 130 };
             skpDetalle.Children.Add(skpDetalleItem1);
             skpDetalle.Children.Add(skpDetalleItem2);
             skpDetalle.Children.Add(skpDetalleItem3);
@@ -74,9 +99,12 @@ namespace COMEX.MarcadoAutomatico
             //Agregando al TextBlock
             StackPanel skpImagen = getSkpImagen();
             StackPanel skpDetalle = getSkpDetalle(codigo, nombre, cargo, departamento);
-            TextBlock txbAuxiliar = new TextBlock() { Width = 600, Height = 146 };
+            StackPanel skpMacado = getSkpMarcado();
+            TextBlock txbAuxiliar = new TextBlock() { Width = 639, Height = 146 };
             txbAuxiliar.Inlines.Add(skpImagen);
             txbAuxiliar.Inlines.Add(skpDetalle);
+            txbAuxiliar.Inlines.Add(skpMacado);
+
             return txbAuxiliar;
         }
 
@@ -118,7 +146,14 @@ namespace COMEX.MarcadoAutomatico
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             txbCriterio.Focus();
-            //generarListaEmpleados();
+            generarListaEmpleados();
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            cbxMarcado.IsChecked = cbxMarcado.IsChecked == false ? true : false;
+            Image o = (Image)e.Source;
+            MessageBox.Show(o.Name);
         }
     }
 }

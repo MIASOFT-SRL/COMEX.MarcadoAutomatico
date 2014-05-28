@@ -39,12 +39,8 @@
                 		</StackPanel>
                 	</InlineUIContainer><InlineUIContainer>
                 		<StackPanel Height="128" Width="218" Orientation="Horizontal">
-                			<CheckBox Content=""/>
-                			<Border BorderBrush="Black" BorderThickness="0" Width="176" CornerRadius="15" ToolTip="Marcado atomático">
-                				<Border.Background>
-                					<ImageBrush ImageSource="imagenes/U-560-C.png"/>
-                				</Border.Background>
-                			</Border>
+                			<CheckBox x:Name="cbxMarcado" Content=""/>
+                			<Image Source="imagenes/U-560-C.png" Width="176"/>
                 		</StackPanel>
                 	</InlineUIContainer></TextBlock>
 
