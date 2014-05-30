@@ -53,5 +53,6 @@ namespace COMEX.MarcadoAutomatico.Datos
         public Nullable<short> InheritDeptRule { get; set; }
         public Nullable<short> EMPRIVILEGE { get; set; }
         public string CardNo { get; set; }
+        public Nullable<bool> ISMARCADO { get; set; }
     }
 }

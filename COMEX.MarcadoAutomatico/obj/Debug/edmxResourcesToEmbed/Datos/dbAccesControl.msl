@@ -512,6 +512,7 @@
     <EntitySetMapping Name="USERINFO">
       <EntityTypeMapping TypeName="dbComexModel.USERINFO">
         <MappingFragment StoreEntitySet="USERINFO">
+          <ScalarProperty Name="ISMARCADO" ColumnName="ISMARCADO" />
           <ScalarProperty Name="USERID" ColumnName="USERID" />
           <ScalarProperty Name="BADGENUMBER" ColumnName="BADGENUMBER" />
           <ScalarProperty Name="SSN" ColumnName="SSN" />

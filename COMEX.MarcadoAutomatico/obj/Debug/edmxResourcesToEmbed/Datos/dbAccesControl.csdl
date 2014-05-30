@@ -576,6 +576,7 @@
     <Property Name="InheritDeptRule" Type="Int16" />
     <Property Name="EMPRIVILEGE" Type="Int16" />
     <Property Name="CardNo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Type="Boolean" Name="ISMARCADO" />
   </EntityType>
   <EntityType Name="UsersMachines">
     <Key>

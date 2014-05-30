@@ -7,10 +7,10 @@ using System.Windows;
 // La información general sobre un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos atributos para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("COMEX.MarcadoAutomatico")]
+[assembly: AssemblyTitle("Marcado Automático")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("MiaSoft srl")]
 [assembly: AssemblyProduct("COMEX.MarcadoAutomatico")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]

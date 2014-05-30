@@ -43,24 +43,39 @@ namespace COMEX.MarcadoAutomatico
             return new Image() { Stretch = Stretch.Fill, Source = source };
         }
 
-        private StackPanel getSkpImagen()
+        private StackPanel getSkpImagen(string position)
         {
             //StackPanel skpImagen
-            StackPanel skpImagen = new StackPanel() { Width = 100, Orientation = Orientation.Vertical };
+            StackPanel skpImagen = new StackPanel() 
+            {
+                Width = 100, 
+                Orientation = Orientation.Vertical,
+                Name = "skpImagen" + position
+            };
             Image imgUsuario = getImagen();
             skpImagen.Children.Add(imgUsuario);
             return skpImagen;
         }
 
-        private StackPanel getSkpMarcado()
+        private StackPanel getSkpMarcado(bool isMarcado, string position)
         {
-            CheckBox cbx = new CheckBox() { Name = "cbxMarcado" };
+            CheckBox cbx = new CheckBox() 
+            { 
+                Name = "cbxMarcado_" + position, 
+                IsChecked = isMarcado 
+            };
             Image img = getImagen("imagenes/U-560-C.png");
+            img.Name = "img_" + position;
             img.Width = 176;
             img.ToolTip = "Marcado automático";
             img.MouseDown += new MouseButtonEventHandler (Image_MouseDown);
-            
-            StackPanel SkpMarcado = new StackPanel() { Height = 128, Width = 218, Orientation = Orientation.Horizontal };
+
+            StackPanel SkpMarcado = new StackPanel() 
+            {
+                Height = 128, Width = 218, 
+                Orientation = Orientation.Horizontal, 
+                Name = ("skpMarcado_" + position) 
+            };
             SkpMarcado.Children.Add(cbx);
             SkpMarcado.Children.Add(img);
 
@@ -79,14 +94,23 @@ namespace COMEX.MarcadoAutomatico
             return skpDetalleItem;
         }
 
-        private StackPanel getSkpDetalle(string codigo, string nombre, string cargo, string departamento)
+        private StackPanel getSkpDetalle(string codigo, string nombre, string cargo, string departamento, string position)
         {
             //StackPanel skpDetalle
             StackPanel skpDetalleItem1 = getSkpDetalleItem("Código :", codigo);
+            skpDetalleItem1.Name = "skpDetalleItem1";
             StackPanel skpDetalleItem2 = getSkpDetalleItem("Nombre :", nombre);
+            skpDetalleItem2.Name = "skpDetalleItem2";
             StackPanel skpDetalleItem3 = getSkpDetalleItem("Cargo :", cargo);
+            skpDetalleItem3.Name = "skpDetalleItem3";
             StackPanel skpDetalleItem4 = getSkpDetalleItem("Departamento :", departamento);
-            StackPanel skpDetalle = new StackPanel() { Width = 312, Height = 130 };
+            skpDetalleItem4.Name = "skpDetalleItem4";
+            StackPanel skpDetalle = new StackPanel() 
+            { 
+                Width = 312, 
+                Height = 130,
+                Name = "skpDetalle_" + position
+            };
             skpDetalle.Children.Add(skpDetalleItem1);
             skpDetalle.Children.Add(skpDetalleItem2);
             skpDetalle.Children.Add(skpDetalleItem3);
@@ -94,18 +118,41 @@ namespace COMEX.MarcadoAutomatico
             return skpDetalle;
         }
 
-        private TextBlock getTextBlock(string codigo, string nombre, string cargo, string departamento)
+        private StackPanel skpPrincipal(string codigo, string nombre, string cargo, string departamento, bool isMarcado, string position)
         {
             //Agregando al TextBlock
-            StackPanel skpImagen = getSkpImagen();
-            StackPanel skpDetalle = getSkpDetalle(codigo, nombre, cargo, departamento);
-            StackPanel skpMacado = getSkpMarcado();
-            TextBlock txbAuxiliar = new TextBlock() { Width = 639, Height = 146 };
-            txbAuxiliar.Inlines.Add(skpImagen);
-            txbAuxiliar.Inlines.Add(skpDetalle);
-            txbAuxiliar.Inlines.Add(skpMacado);
+            StackPanel skpImagen = getSkpImagen(position);
+            StackPanel skpDetalle = getSkpDetalle(codigo, nombre, cargo, departamento,position);
+            StackPanel skpMarcado = getSkpMarcado(isMarcado, position);
+            StackPanel skpPrincipal = new StackPanel() 
+            {
+                Width = 639, Height = 146, 
+                Orientation = Orientation.Horizontal, 
+                Name = "skpPrincipal_" + position 
+            };
+            skpPrincipal.Children.Add(skpImagen);
+            skpPrincipal.Children.Add(skpDetalle);
+            skpPrincipal.Children.Add(skpMarcado);
 
-            return txbAuxiliar;
+            return skpPrincipal;
+        }
+
+        #endregion
+
+        #region"Eventos personalizados"
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Image img = (Image)e.Source;
+            string name = img.Name;
+            string[] l = name.Split('_');
+            int pos = int.Parse(l[1]);
+
+            StackPanel skp = lbEmpleados.Items[pos] as StackPanel;
+            StackPanel skpAuxiliar = (StackPanel)skp.Children[2];
+            CheckBox cbx = (CheckBox)skpAuxiliar.Children[0];
+
+            cbx.IsChecked = cbx.IsChecked == false ? true : false;
         }
 
         #endregion
@@ -123,6 +170,7 @@ namespace COMEX.MarcadoAutomatico
             Datos.dbComexEntities db = new Datos.dbComexEntities();
             List<Datos.USERINFO> lista = getEmpleados();
             lbEmpleados.Items.Clear();
+            int pos = 0;
             foreach (Datos.USERINFO empleado in lista)
             {
                 Datos.DEPARTMENTS deparatamento = db.DEPARTMENTS.FirstOrDefault(d => d.DEPTID == empleado.DEFAULTDEPTID);
@@ -133,9 +181,40 @@ namespace COMEX.MarcadoAutomatico
                 }
 
                 //Agregando al ListBox
-                lbEmpleados.Items.Add(getTextBlock(empleado.BADGENUMBER,empleado.NAME,empleado.TITLE,deparatamento.DEPTNAME));
+                lbEmpleados.Items.Add(skpPrincipal(empleado.BADGENUMBER, empleado.NAME, empleado.TITLE, deparatamento.DEPTNAME,(bool)empleado.ISMARCADO, pos.ToString()));
+                pos++;
             }
         }
+
+        private List<Datos.USERINFO> getCodigoEmpleados()
+        {
+          
+            List<Datos.USERINFO> empleados = new List<Datos.USERINFO>();
+            foreach (var item in lbEmpleados.Items)
+            {
+                if (item is StackPanel)
+                {
+                    Datos.USERINFO empleado = new Datos.USERINFO();
+                    StackPanel skp = (StackPanel)item;
+                    StackPanel skpDetalle = (StackPanel)skp.Children[1];
+                    StackPanel skpMarcado = (StackPanel)skp.Children[2];
+                    StackPanel skpDetalleItem = (StackPanel)skpDetalle.Children[0];
+                    Label lbl = (Label)skpDetalleItem.Children[1];
+                    CheckBox cbx = (CheckBox)skpMarcado.Children[0];
+                    empleado.BADGENUMBER = lbl.Content.ToString();
+                    empleado.ISMARCADO = cbx.IsChecked;
+                    empleados.Add(empleado);
+                }
+            }
+            return empleados;
+        }
+
+        private bool getIsMarcadoAutomatico(string codigo)
+        {
+            List<Datos.USERINFO> empleados = getCodigoEmpleados();
+            return (bool)empleados.FirstOrDefault(e => e.BADGENUMBER.Equals(codigo)).ISMARCADO;
+        }
+
         #endregion
 
         public MainWindow()
@@ -149,11 +228,37 @@ namespace COMEX.MarcadoAutomatico
             generarListaEmpleados();
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            cbxMarcado.IsChecked = cbxMarcado.IsChecked == false ? true : false;
-            Image o = (Image)e.Source;
-            MessageBox.Show(o.Name);
+            try
+            {
+                Datos.dbComexEntities db = new Datos.dbComexEntities();
+                List<Datos.USERINFO> empleados = db.USERINFO.ToList();
+
+                foreach (Datos.USERINFO empleado in empleados)
+                {
+                    empleado.ISMARCADO = getIsMarcadoAutomatico(empleado.BADGENUMBER);
+                }
+                //Guardando los cambios
+                db.SaveChanges();
+                //Generando de nuevo a los empleados
+                generarListaEmpleados();
+                
+                MessageBox.Show("Se guardaron los cambios correctamente", "MiaSoft srl", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
+            catch (Exception r)
+            {
+                string fecha = DateTime.Now.ToString();
+                string nombre = DateTime.Now.Year.ToString()
+                    + DateTime.Now.Month.ToString().PadLeft(2, '0')
+                    + DateTime.Now.Day.ToString().PadLeft(2, '0') + ".txt";
+                string ruta = "Log/" + nombre;
+                using (StreamWriter escribir = new StreamWriter(ruta, true))
+                {
+                    escribir.WriteLine(fecha + "    " + r.Message + "   Source:" + r.Source + "     " + r.TargetSite);
+                }
+                MessageBox.Show("No se pudieron guardar los cambios generados" + Environment.NewLine + "Si el problema persiste comuníquese con su administrador de sistemas", "MiaSoft srl", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
