@@ -25,3 +25,4 @@ C:\Users\ALDO\Documents\GitHub\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\o
 C:\Users\ALDO\Documents\GitHub\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico.csproj.GenerateResource.Cache
 C:\Users\ALDO\Documents\GitHub\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico.exe
 C:\Users\ALDO\Documents\GitHub\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico.pdb
+C:\Users\ALDO\Documents\GitHub\COMEX.MarcadoAutomatico\COMEX.MarcadoAutomatico\obj\Debug\COMEX.MarcadoAutomatico.csprojResolveAssemblyReference.cache
