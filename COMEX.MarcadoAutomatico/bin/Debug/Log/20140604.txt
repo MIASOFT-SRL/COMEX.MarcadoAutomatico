@@ -1,0 +1,2 @@
+04/06/2014 10:58:18 AM    Referencia a objeto no establecida como instancia de un objeto.   Source:COMEX.MarcadoAutomatico     Boolean getIsMarcadoAutomatico(System.String)
+04/06/2014 10:59:41 AM    Referencia a objeto no establecida como instancia de un objeto.   Source:COMEX.MarcadoAutomatico     Boolean getIsMarcadoAutomatico(System.String)

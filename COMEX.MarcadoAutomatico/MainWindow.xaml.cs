@@ -165,6 +165,12 @@ namespace COMEX.MarcadoAutomatico
             return db.USERINFO.ToList();
         }
 
+        private List<Datos.USERINFO> getEmpleados(string criterio)
+        {
+            Datos.dbComexEntities db = new Datos.dbComexEntities();
+            return db.USERINFO.Where(u => u.NAME.ToUpper().Contains(criterio.ToUpper())).ToList();
+        }
+
         private void generarListaEmpleados()
         {
             Datos.dbComexEntities db = new Datos.dbComexEntities();
@@ -182,6 +188,27 @@ namespace COMEX.MarcadoAutomatico
 
                 //Agregando al ListBox
                 lbEmpleados.Items.Add(skpPrincipal(empleado.BADGENUMBER, empleado.NAME, empleado.TITLE, deparatamento.DEPTNAME,(bool)empleado.ISMARCADO, pos.ToString()));
+                pos++;
+            }
+        }
+
+        private void generarListaEmpleados(string criterio)
+        {
+            Datos.dbComexEntities db = new Datos.dbComexEntities();
+            List<Datos.USERINFO> lista = getEmpleados(criterio);
+            lbEmpleados.Items.Clear();
+            int pos = 0;
+            foreach (Datos.USERINFO empleado in lista)
+            {
+                Datos.DEPARTMENTS deparatamento = db.DEPARTMENTS.FirstOrDefault(d => d.DEPTID == empleado.DEFAULTDEPTID);
+
+                if (deparatamento == null)
+                {
+                    deparatamento = new Datos.DEPARTMENTS() { DEPTNAME = "Desconcido" };
+                }
+
+                //Agregando al ListBox
+                lbEmpleados.Items.Add(skpPrincipal(empleado.BADGENUMBER, empleado.NAME, empleado.TITLE, deparatamento.DEPTNAME, (bool)empleado.ISMARCADO, pos.ToString()));
                 pos++;
             }
         }
@@ -209,12 +236,6 @@ namespace COMEX.MarcadoAutomatico
             return empleados;
         }
 
-        private bool getIsMarcadoAutomatico(string codigo)
-        {
-            List<Datos.USERINFO> empleados = getCodigoEmpleados();
-            return (bool)empleados.FirstOrDefault(e => e.BADGENUMBER.Equals(codigo)).ISMARCADO;
-        }
-
         #endregion
 
         public MainWindow()
@@ -233,11 +254,15 @@ namespace COMEX.MarcadoAutomatico
             try
             {
                 Datos.dbComexEntities db = new Datos.dbComexEntities();
-                List<Datos.USERINFO> empleados = db.USERINFO.ToList();
+                List<Datos.USERINFO> empleados = getCodigoEmpleados();
 
-                foreach (Datos.USERINFO empleado in empleados)
+                foreach (Datos.USERINFO empleadoModificado in empleados)
                 {
-                    empleado.ISMARCADO = getIsMarcadoAutomatico(empleado.BADGENUMBER);
+                    Datos.USERINFO empleado = db.USERINFO.FirstOrDefault(em => em.BADGENUMBER == empleadoModificado.BADGENUMBER);
+                    if (empleado != null)
+                    {
+                        empleado.ISMARCADO = empleadoModificado.ISMARCADO;
+                    }
                 }
                 //Guardando los cambios
                 db.SaveChanges();
@@ -258,6 +283,20 @@ namespace COMEX.MarcadoAutomatico
                     escribir.WriteLine(fecha + "    " + r.Message + "   Source:" + r.Source + "     " + r.TargetSite);
                 }
                 MessageBox.Show("No se pudieron guardar los cambios generados" + Environment.NewLine + "Si el problema persiste comuníquese con su administrador de sistemas", "MiaSoft srl", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void txbCriterio_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox txb = (TextBox)e.Source;
+            string criterio = txb.Text;
+            if (txb.Text.Length > 2)
+            {
+                generarListaEmpleados(criterio);
+            }
+            if (txb.Text.Length == 0)
+            {
+                generarListaEmpleados();
             }
         }
     }
