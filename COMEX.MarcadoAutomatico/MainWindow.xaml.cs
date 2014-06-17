@@ -236,6 +236,117 @@ namespace COMEX.MarcadoAutomatico
             return empleados;
         }
 
+        private int getHora()
+        {
+            string[] time = txbHora.Text.Split(':');
+            string hora = time[0];
+            hora = hora.TrimStart('0');
+            int h = 0;
+            if (int.TryParse(hora, out h))
+            {
+                return h;
+            }
+            else
+            {
+                return h;
+            }
+        }
+        private int getMinuto()
+        {
+            string[] time = txbHora.Text.Split(':');
+            string minuto = time[1];
+            minuto = minuto.TrimStart('0');
+            int m = 0;
+            if (int.TryParse(minuto, out m))
+            {
+                return m;
+            }
+            else
+            {
+                return m;
+            }
+        }
+        private int getSegundo()
+        {
+            string[] time = txbHora.Text.Split(':');
+            string segundo = time[2];
+            segundo = segundo.TrimStart('0');
+            int s = 0;
+            if (int.TryParse(segundo, out s))
+            {
+                return s;
+            }
+            else
+            {
+                return s;
+            }
+        }
+        private bool validarHora(string hora)
+        {
+            if (hora.Contains(':'))
+            {
+                string[] vhora = hora.Split(':');
+                if (vhora.Length == 3)
+                {
+                    string ho = vhora[0];
+                    string mi = vhora[1];
+                    string se = vhora[2];
+                    ho = ho.Equals("00") || ho.Equals("0") ? "0" : ho.TrimStart('0');
+                    mi = mi.Equals("00") || mi.Equals("0") ? "0" : mi.TrimStart('0');
+                    se = se.Equals("00") || se.Equals("0") ? "0" : se.TrimStart('0');
+                    int h = 0;
+                    int m = 0;
+                    int s = 0;
+
+                    if (int.TryParse(ho, out h))
+                    {
+                        if (h >= 0 && h <= 23)
+                        {
+                            if (int.TryParse(mi, out m))
+                            {
+                                if (m >= 0 && m <= 59)
+                                {
+                                    if (int.TryParse(se, out s))
+                                    {
+                                        if (s >= 0 && s <= 59)
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool validarSeleccionlbEmpleados()
+        {
+            if (lbEmpleados.SelectedIndex >= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool validarEstado()
+        {
+            if (cbEstado.SelectedIndex >= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool validarFecha()
+        {
+            if (dpFecha.SelectedDate != null)
+            {
+                return true;
+            }
+            return false;
+        }
         #endregion
 
         public MainWindow()
@@ -245,6 +356,7 @@ namespace COMEX.MarcadoAutomatico
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            txbHora.MaxLength = 8;
             txbCriterio.Focus();
             generarListaEmpleados();
         }
@@ -299,5 +411,91 @@ namespace COMEX.MarcadoAutomatico
                 generarListaEmpleados();
             }
         }
+
+        private void btnAñadirRegistro_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Validaciones
+                if (!validarSeleccionlbEmpleados())
+                {
+                    MessageBox.Show("No se ha seleccionado ningun empleado");
+                    return;
+                }
+                if (!validarEstado())
+                {
+                    MessageBox.Show("No se ha seleccionado un estado");
+                    cbEstado.Focus();
+                    return;
+                }
+                if (!validarFecha())
+                {
+                    MessageBox.Show("No se ha seleccionado una fecha");
+                    dpFecha.Focus();
+                    return;
+                }
+                if (!validarHora(txbHora.Text))
+                {
+                    MessageBox.Show("El formato de la hora no es el correcto");
+                    txbHora.Focus();
+                    return;
+                }
+
+                Datos.dbComexEntities db = new Datos.dbComexEntities();
+                //Buscando el BADGENUMBER
+                StackPanel skp = (StackPanel)lbEmpleados.SelectedItem;
+                StackPanel skpDetalle = (StackPanel)skp.Children[1];
+                StackPanel skpDetalleItem = (StackPanel)skpDetalle.Children[0];
+                Label lbl = (Label)skpDetalleItem.Children[1];
+                //Obteniendo al empleado
+                string BADGENUMBER = lbl.Content.ToString();
+                Datos.USERINFO empleado = db.USERINFO.FirstOrDefault(em => em.BADGENUMBER.Equals(BADGENUMBER));
+                Datos.Machines dispositivo = db.Machines.Take(1).ToList()[0];
+                //cargando el registro
+                Datos.CHECKINOUT marcado = new Datos.CHECKINOUT();
+                marcado.USERID = empleado.USERID;
+                DateTime? fechaAux = dpFecha.SelectedDate == null ? DateTime.Now : dpFecha.SelectedDate;
+                int h = getHora();
+                int m = getMinuto();
+                int s = getSegundo();
+                if (h == 0 && m == 0 && s == 0)
+                {
+                    if (MessageBox.Show("Esta seguro de que quiere colocar esta hora 00:00:00","MiaSoft srl", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                    {
+                        return;
+                    }
+                }
+                DateTime fechaRegistro = new DateTime(fechaAux.Value.Year, fechaAux.Value.Month, fechaAux.Value.Day, h, m, s);
+                marcado.CHECKTIME = fechaRegistro;
+                int estado = cbEstado.SelectedIndex;
+                marcado.CHECKTYPE = estado == 0 ? "I" : "O";
+                marcado.VERIFYCODE = 1;
+                marcado.SENSORID = dispositivo.MachineNumber.ToString();
+                marcado.WorkCode = 0;
+                marcado.sn = "0351140200162";
+                marcado.UserExtFmt = 1;
+
+                //añadiendo el registro
+                db.CHECKINOUT.Add(marcado);
+                db.SaveChanges();
+
+                MessageBox.Show("Se añadio correctamente el registro");
+            }
+            catch (Exception r)
+            {
+                string fecha = DateTime.Now.ToString();
+                string nombre = DateTime.Now.Year.ToString()
+                    + DateTime.Now.Month.ToString().PadLeft(2, '0')
+                    + DateTime.Now.Day.ToString().PadLeft(2, '0') + ".txt";
+                string ruta = "Log/" + nombre;
+                using (StreamWriter escribir = new StreamWriter(ruta, true))
+                {
+                    escribir.WriteLine(fecha + "    " + r.Message + "   Source:" + r.Source + "     " + r.TargetSite);
+                }
+                MessageBox.Show("No se pudo añadir el registro" + Environment.NewLine + "Si el problema persiste comuníquese con su administrador de sistemas", "MiaSoft srl", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        
     }
 }

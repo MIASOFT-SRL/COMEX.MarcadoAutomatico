@@ -131,7 +131,7 @@
             </Border.Triggers>
         </Border>
         <Border BorderBrush="Black" BorderThickness="0" Height="50" Margin="0,183,71,0" VerticalAlignment="Top" Background="#FF0091FF" CornerRadius="20" HorizontalAlignment="Right" Width="177">
-            <Button x:Name="btnGuardar" Content="Guardar cambios" Margin="-1,-1,-1,0" VerticalAlignment="Top" Height="49" Background="{x:Null}" Foreground="White" BorderThickness="0" Cursor="Hand" FontSize="16" Click="btnGuardar_Click"/>
+            <Button x:Name="btnGuardar" Content="Guardar cambios" Margin="0,1,-2,0" VerticalAlignment="Top" Height="49" Background="{x:Null}" Foreground="White" BorderThickness="0" Cursor="Hand" FontSize="16" Click="btnGuardar_Click"/>
         </Border>
         <Border Name="borderLogoMiasoft" BorderBrush="Black" BorderThickness="0" Height="138" Margin="0,10,14,0" VerticalAlignment="Top" CornerRadius="30" HorizontalAlignment="Right" Width="284">
             <Border.Background>
@@ -170,6 +170,19 @@
         <StackPanel Margin="10,0,14,-8" Orientation="Horizontal" Height="38" VerticalAlignment="Bottom">
             <Label Content="Ing. Luis Helder choque Jorge : 72634488 - Ing. Jose Luis Vidal Cejas : 71010967 - Ing.Miguel Aldo Balderrama Vaca : 60895096" VerticalAlignment="Top" Height="38" Foreground="#FF0066B2" FontSize="16" Width="919" />
         </StackPanel>
-
+        <Grid Margin="0,332,0,62" HorizontalAlignment="Right" Width="308">
+            <Label Content="Estado :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="16"/>
+            <ComboBox x:Name="cbEstado" HorizontalAlignment="Left" Margin="84,6,0,0" VerticalAlignment="Top" Width="190" FontSize="16">
+                <ComboBoxItem Content="M/Ent" FontSize="16"/>
+                <ComboBoxItem Content="M/Sal"/>
+            </ComboBox>
+            <GroupBox Header="Añadir Registro" Margin="0,36,10,0" FontSize="16" Height="84" VerticalAlignment="Top">
+                <Grid Margin="4,5,4,4">
+                    <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDateFormat="Short" Cursor="Hand" FontSize="16" Width="190" Margin="2,10,0,0"/>
+                    <TextBox x:Name="txbHora" HorizontalAlignment="Left" Height="23" Margin="197,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="16" Text="00:00:00"/>
+                </Grid>
+            </GroupBox>
+            <Button x:Name="btnAñadirRegistro" Content="Añadir" HorizontalAlignment="Left" Margin="63,125,0,0" VerticalAlignment="Top" Width="173" Height="51" FontSize="16" Background="#FF0091FF" Foreground="White" Click="btnAñadirRegistro_Click"/>
+        </Grid>
     </Grid>
 </Window>
